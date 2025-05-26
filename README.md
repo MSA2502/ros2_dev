@@ -1,6 +1,6 @@
 ### heading
 
-
+You should take the following steps:
 1)git clone this repo
 2)build the docker file using the following command:
     docker build -t imageName .
