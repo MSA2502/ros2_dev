@@ -4,8 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
     python3-colcon-common-extensions \
-    ros-humble-rclpy \
-    ros-humble-std-msgs \
+    ros-${ROS_DISTRO}-desktop \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /ros2_ws
@@ -18,4 +17,3 @@ RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
-#
