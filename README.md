@@ -9,12 +9,12 @@ You should take the following steps:
 
 3)create a container of the image using the following commands:
  ```sh
-       docker run -it --name containerName imageName
+docker run -it --name containerName imageName
    ```
 
 4) at this you can run the following command in the terminal you are currently in: 
  ```sh
-        ros2 run py_pubsub talker
+ros2 run py_pubsub talker
    ```
 
 5)you should see the publisher running at this point in the terminal
@@ -24,6 +24,6 @@ You should take the following steps:
 7) once you are in the new terminal, run the following commands:
 
  ```sh
-           docker exec -it containerName /bin/bash -c "source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 run py_pubsub listener"
+docker exec -it containerName /bin/bash -c "source /opt/ros/humble/setup.bash && source /ros2_ws/install/setup.bash && ros2 run py_pubsub listener"
 
    ```
