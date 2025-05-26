@@ -5,7 +5,7 @@ docker run -it \
     --network=host \
     --env="DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
-    --volume="${HOME}/ros2_ws:/root" \
+    --volume="${HOME}/ros2_dev:/root" \
     --name="ros2_container" \
     ros2:latest
     
