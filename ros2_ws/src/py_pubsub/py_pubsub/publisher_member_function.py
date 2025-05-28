@@ -16,22 +16,29 @@ import rclpy
 from rclpy.node import Node
 
 from std_msgs.msg import String
+from geometry_msgs.msg import Point
+
 
 
 class MinimalPublisher(Node):
 
     def __init__(self):
         super().__init__('minimal_publisher')
-        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        self.publisher1_ = self.create_publisher(String, 'topic', 10)
+        self.publisher2_ = self.create_publisher(Point, 'topic1', 10)
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0
 
     def timer_callback(self):
         msg = String()
+        msg2 = Point()
         msg.data = 'Hello World: %d' % self.i
-        self.publisher_.publish(msg)
+        msg2.x = 5.5 + self.i
+        self.publisher1_.publish(msg)
+        self.publisher2_.publish(msg2)        
         self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.get_logger().info('Publishing: "%s"' % msg2.x)
         self.i += 1
 
 
@@ -39,13 +46,15 @@ def main(args=None):
     rclpy.init(args=args)
 
     minimal_publisher = MinimalPublisher()
+    min_pub = MinimalPublisher()
 
     rclpy.spin(minimal_publisher)
-
+    rclpy.spin(min_pub)
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
     minimal_publisher.destroy_node()
+    min_pub.destroy_node()
     rclpy.shutdown()
 
 
