@@ -1,0 +1,5 @@
+string order
+---
+string[] sequence
+---
+string[] partial_sequence
