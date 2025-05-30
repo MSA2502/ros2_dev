@@ -29,7 +29,11 @@ class MinimalPublisher(Node):
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.i = 0
-
+        self.subscription3 = self.create_subscription(
+            String,
+            'topic2',
+            self.listener_callback2,
+            10)
     def timer_callback(self):
         msg = String()
         msg2 = Point()
@@ -41,20 +45,23 @@ class MinimalPublisher(Node):
         self.get_logger().info('Publishing: "%s"' % msg2.x)
         self.i += 1
 
+    def listener_callback2(self, msg3):
+        self.get_logger().info('I heard: "%s"' % msg3.data)
 
+    
 def main(args=None):
     rclpy.init(args=args)
 
     minimal_publisher = MinimalPublisher()
-    min_pub = MinimalPublisher()
+    #min_pub = MinimalPublisher()
 
     rclpy.spin(minimal_publisher)
-    rclpy.spin(min_pub)
+    #rclpy.spin(min_pub)
     # Destroy the node explicitly
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
     minimal_publisher.destroy_node()
-    min_pub.destroy_node()
+    #min_pub.destroy_node()
     rclpy.shutdown()
 
 

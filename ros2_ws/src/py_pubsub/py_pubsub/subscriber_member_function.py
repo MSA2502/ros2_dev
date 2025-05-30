@@ -33,7 +33,19 @@ class MinimalSubscriber(Node):
             'topic1',
             self.listener_callback1,
             10)
+        self.publisher3_ = self.create_publisher(String, 'topic2', 10)
+        timer_period = 0.5  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.j = 0
         self.subscription1  # prevent unused variable warning
+
+
+    def timer_callback(self):
+        msg3 = String()
+        msg3.data = 'test: %d' % self.j
+        self.publisher3_.publish(msg3)
+        self.get_logger().info('Publishing: "%s"' % msg3.data)
+        self.j += 1
 
     def listener_callback(self, msg):
         self.get_logger().info('I heard: "%s"' % msg.data)
@@ -45,6 +57,7 @@ def main(args=None):
     rclpy.init(args=args)
 
     minimal_subscriber = MinimalSubscriber()
+    #minimal_publisher = MinimalPublisher()
 
     rclpy.spin(minimal_subscriber)
 
