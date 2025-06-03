@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(action_tutorials_interfaces)
+project(cpp_pubsub)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -22,12 +22,5 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-find_package(rosidl_default_generators REQUIRED)
-
-rosidl_generate_interfaces(${PROJECT_NAME}
-  "action/Fibonacci.action"
-  "action/String.action"
-)
 
 ament_package()
